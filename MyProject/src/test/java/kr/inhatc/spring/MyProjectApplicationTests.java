@@ -20,6 +20,6 @@ class MyProjectApplicationTests {
 
 	@Test
 	public void testSqlSessionTest() {
-		System.out.println("=====>" + sqlSessionTemplate);
+		System.out.println("=====>" + sqlSessionTemplate.toString());
 	}
 }

@@ -26,7 +26,9 @@
 			<tbody>
 				<tr th:if="${#lists.size(list)} > 0" th:each="vo : ${list}">
 					<td th:text='${vo.boardIdx}' align="center"></td>
-					<td th:text='${vo.title}' align="center"></td>
+					<td class="title">
+						<a href="/board/boardDetail?boardIdx=" th:attrappend="href=${vo.boardIdx}" th:text="${vo.title}"></a>
+					</td>
 					<td th:text='${vo.hitCnt}' align="center"></td>
 					<td th:text='${vo.createDatetime}' align="center"></td>
 				</tr>
@@ -35,6 +37,7 @@
 				</tr>
 			</tbody>
 		</table>
+		<a href="/board/boardWrite" class="btn">글쓰기</a>
 	</div>
 </body>
 </html>

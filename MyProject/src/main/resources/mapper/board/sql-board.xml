@@ -7,5 +7,25 @@
     	<select id="boardList" resultType="kr.inhatc.spring.board.dto.BoardDto">
     		SELECT board_idx, title, hit_cnt, TO_CHAR(CREATE_DATETIME, 'YYYY-MM-DD') AS CREATE_DATETIME
 			FROM T_BOARD
+			WHERE delete_yn = 'N'
+			ORDER BY board_idx DESC
+    	</select>
+    	
+    	<insert id="boardInsert" parameterType="kr.inhatc.spring.board.dto.BoardDto">
+    		<!-- 시퀀스 값 가져오기 -->
+    		<selectKey keyProperty="boardIdx" resultType="int" order="BEFORE">
+				SELECT board_seq.nextval FROM DUAL
+    		</selectKey>
+    		
+    		INSERT INTO T_BOARD (BOARD_IDX, TITLE, CONTENTS, CREATE_DATETIME, CREATE_ID)
+			VALUES(#{boardIdx}, #{title}, #{contents}, sysdate, 'admin')
+    	</insert>
+    	
+    	<!-- boardDetail -->
+    	<select id="boardDetail" parameterType="int" resultType="kr.inhatc.spring.board.dto.BoardDto">
+    		SELECT board_idx, title, contents, hit_cnt, 
+    		TO_CHAR(CREATE_DATETIME, 'YYYY-MM-DD') AS CREATE_DATETIME, create_id
+			FROM T_BOARD
+			WHERE delete_yn = 'N' AND board_idx = #{boardIdx}
     	</select>
     </mapper>

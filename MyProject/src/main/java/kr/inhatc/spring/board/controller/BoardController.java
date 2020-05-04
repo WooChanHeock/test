@@ -27,7 +27,7 @@ public class BoardController {
 	@RequestMapping("/board/boardList")
 	public String boardList(Model model) {
 		List<BoardDto> list = boardService.boardList();
-		System.out.println("================>" + list.size());
+		//System.out.println("================>" + list.size());
 		model.addAttribute("list", list);
 		return "board/boardList";
 	}
@@ -49,4 +49,18 @@ public class BoardController {
 		model.addAttribute("board", board);
 		return "board/boardDetail";
 	}
+	
+	@RequestMapping("/board/boardUpdate")
+	public String boardUpdate(BoardDto board) {
+		boardService.boardUpdate(board);
+		return "redirect:/board/boardList";
+	}
+	
+	
+	@RequestMapping("/board/boardDelete")
+	public String boardDelete(@RequestParam("boardIdx") int boardIdx) {
+		boardService.boardDelete(boardIdx);
+		return "redirect:/board/boardList";
+	}
+	
 }

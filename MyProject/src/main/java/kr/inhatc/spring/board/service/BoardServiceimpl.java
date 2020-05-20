@@ -62,6 +62,11 @@ public class BoardServiceimpl implements BoardService {
 	public BoardDto boardDetail(int boardIdx) {
 		boardMapper.updateHit(boardIdx);
 		BoardDto board = boardMapper.boardDetail(boardIdx);
+		
+		// 파일 정보
+		List<FileDto> fileList = boardMapper.selectBoardFileList(boardIdx);
+		board.setFileList(fileList);
+		
 		return board;
 	}
 

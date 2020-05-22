@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>회원 리스트</title>
+<link rel="stylesheet" th:href="@{/css/style.css}"></link>
+</head>
+<body>
+	<div class="container">
+		<h2>회원 목록</h2>
+		<table class="board_list" >
+			<colgroup>
+				<col width="20%"/>
+				<col width="*"/>
+				<col width="20%"/>
+				<col width="20%"/>
+			</colgroup>
+			<thead>
+				<tr>
+					<th scope="col">회원번호</th>
+					<th scope="col">회원아이디</th>
+					<th scope="col">이메일</th>
+					<th scope="col">이름</th>
+					<th scope="col">역할</th>
+					<th scope="col">가입날짜</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${#lists.size(list)} > 0" th:each="vo : ${list}">
+					<td th:text='${vo.memberIdx}' align="center"></td>
+					<td class="memberID">
+						<a href="/member/memberDetail?memberIdx=" th:attrappend="href=${vo.memberIdx}" th:text="${vo.memberID}"></a>
+					</td>
+					<td th:text='${vo.email}' align="center"></td>
+					<td th:text='${vo.name}' align="center"></td>
+					<td th:text='${vo.role}' align="center"></td>
+					<td th:text='${vo.joinDate}' align="center"></td>
+				</tr>
+				<tr th:unless="${#lists.size(list)} > 0">
+					<td colspan="6">조회된 결과가 없습니다. 201845085</td>
+				</tr>
+			</tbody>
+		</table>
+		<a href="/member/memberWrite" class="btn">회원 추가</a>
+	</div>
+</body>
+</html>

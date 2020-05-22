@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+    <mapper namespace="kr.inhatc.spring.member.mapper.MemberMapper">
+    	<select id="memberList" resultType="kr.inhatc.spring.member.dto.MemberDto">
+    		SELECT member_idx, member_id, email, name, role, TO_CHAR(JOIN_DATE, 'YYYY-MM-DD') AS JOIN_DATE
+			FROM MEMBER
+			WHERE enabled = 'N'
+			ORDER BY member_idx DESC
+    	</select>
+    </mapper>

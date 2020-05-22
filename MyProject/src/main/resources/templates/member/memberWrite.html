@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>회원 작성</title>
+<link rel="stylesheet" th:href="@{/css/style.css}"></link>
+</head>
+<body>
+	<div class="container">
+		<h2>회원 작성</h2>
+		
+		<form id="frm" name="frm"  method="post" action="/member/memberInsert" enctype="multipart/form-data">
+			<table class="board_detail">
+				<tr>
+					<td>회원 아이디</td>
+					<td><input type="text" id="memberID" name="memberID"/></td>
+				</tr>
+				<tr>
+					<td>이름</td>
+					<td><input type="text" id="name" name="name"/></td>
+				</tr>
+				<tr>
+					<td>비밀번호</td>
+					<td><input type="password" id="pw" name="pw"/></td>
+				</tr>
+				<tr>
+					<td>이메일</td>
+					<td><input type="text" id="email" name="email"/></td>
+				</tr>
+				<tr>
+					<td>역할</td>
+					<td><select name="role" id="role">
+    				<option value="">역할선택</option>
+    				<option value="사용자">사용자</option>
+    				<option value="관리자">관리자</option>
+    				<option value="기타">기타</option>
+					</select></td>
+				</tr>
+			</table>
+			<!-- <input type="file" id="files" name="files" multiple="multiple" > 
+			<input type="submit" id="submit" value="저 장" class="btn"> -->
+		</form>
+	</div>
+</body>
+</html>

@@ -82,4 +82,10 @@ public class BoardServiceimpl implements BoardService {
 		
 	}
 
+	@Override
+	public FileDto selectFileInfo(int idx, int boardIdx) {
+		FileDto boardFile = boardMapper.selectFileInfo(idx, boardIdx);
+		return boardFile;
+	}
+
 }

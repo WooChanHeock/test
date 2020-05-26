@@ -10,4 +10,71 @@
 			WHERE enabled = 'N'
 			ORDER BY member_idx DESC
     	</select>
+    	
+    	<insert id="memberInsert" parameterType="kr.inhatc.spring.member.dto.MemberDto">
+    		<!-- 시퀀스 값 가져오기 -->
+    		<selectKey keyProperty="memberIdx" resultType="int" order="BEFORE">
+				SELECT member_seq.nextval FROM DUAL
+    		</selectKey>
+			
+			INSERT INTO MEMBER (MEMBER_ID, EMAIL, JOIN_DATE, NAME, PW, ROLE, MEMBER_IDX)
+			VALUES(#{memberID}, #{email}, sysdate, #{name}, #{pw}, #{role}, #{memberIdx})
+			
+    	</insert>
+    	
+    	<!-- memberDetail -->
+    	<select id="memberDetail" parameterType="int" resultType="kr.inhatc.spring.member.dto.MemberDto">
+    		SELECT member_idx, member_id, email, name, pw, role, TO_CHAR(JOIN_DATE, 'YYYY-MM-DD') AS JOIN_DATE
+			FROM MEMBER
+			WHERE enabled = 'N' AND member_idx = #{memberIdx}
+    	</select>
+    	
+    	<update id="memberUpdate" parameterType="kr.inhatc.spring.member.dto.MemberDto">
+    		UPDATE MEMBER
+    		SET email = #{email},
+    			pw = #{pw}
+    		WHERE member_idx = #{memberIdx}
+    	</update>
+    	
+    	<update id="memberDelete" parameterType="int">
+    		UPDATE MEMBER
+    		SET enabled = 'Y'
+    		WHERE member_idx = #{memberIdx}
+    	</update>
+    	
+    	
+    	<insert id="memberFileInsert" parameterType="kr.inhatc.spring.member.dto.FileDto">
+    		INSERT INTO t_file2(
+    		IDX,
+    		MEMBER_IDX, 
+    		ORIGINAL_FILE_NAME, 
+    		STORED_FILE_PATH, 
+    		FILE_SIZE, 
+    		CREATOR_ID, 
+    		CREATE_DATETIME
+    		)
+    		SELECT file_seq.nextval, A.* FROM(
+    			<foreach item = "item" collection="list" separator="UNION ALL ">
+    				SELECT #{item.memberIdx} as member_idx,
+    				#{item.originalFileName} as original_file_name,
+    				#{item.storedFilePath} as stored_file_path,
+    				#{item.fileSize} as file_size,
+    				'admin',
+    				sysdate
+    				FROM DUAL
+    			</foreach>) A
+    	</insert>
+    	
+    	<select id="selectMemberFileList" parameterType="int" resultType="kr.inhatc.spring.member.dto.FileDto">
+    	SELECT idx, member_idx, original_file_name, ROUND(file_size/1024) as file_size
+    	FROM t_file2
+    	WHERE member_idx = #{memberIdx} AND deleted_yn = 'N'
+    	</select>
+    	
+    	<select id="selectFileInfo" parameterType="map" resultType="kr.inhatc.spring.member.dto.FileDto">
+    	SELECT original_file_name, stored_file_path , file_size
+    	FROM t_file2
+    	WHERE idx = #{idx} AND member_idx = #{memberIdx} AND deleted_yn = 'N'
+    	</select>
+    	
     </mapper>

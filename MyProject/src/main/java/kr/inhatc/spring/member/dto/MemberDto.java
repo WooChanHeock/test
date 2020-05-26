@@ -18,5 +18,6 @@ public class MemberDto {
 	private String role;
 	private int memberIdx;
 	
-	
+	//파일 관리를 위한 리스트 추가
+	private List<FileDto> fileList;
 }

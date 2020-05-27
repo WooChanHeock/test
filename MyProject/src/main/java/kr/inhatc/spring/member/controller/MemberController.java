@@ -25,11 +25,6 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
-	@RequestMapping("/")
-	public String hello() {
-		return "index";
-	}
-	
 	@RequestMapping("/member/memberList")
 	public String boardList(Model model) {
 		List<MemberDto> list = memberService.memberList();

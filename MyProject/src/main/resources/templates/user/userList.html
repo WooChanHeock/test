@@ -1,23 +1,31 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>게시판 리스트</title>
-<link rel="stylesheet" th:href="@{/css/style.css}"></link>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/default">
+
+<!-- index.html 고유 CSS 추가 -->
+<th:block layout:fragment="css">
+	<link rel="stylesheet" th:href="@{/css/style.css}"></link>
+</th:block>
+
+<!-- index.html 고유 스크립트 추가 -->
+<th:block layout:fragment="script">
+</th:block>
+
+<div layout:fragment="content">
+
 	<div class="container">
-		<h2>사용자 목록</h2>
-		<table class="board_list" >
+		<h1>사용자 목록</h1>
+		<table class="table table-hover table-dark">
 			<colgroup>
-				<col width="10%"/>
-				<col width="10%"/>
-				<col width="20%"/>
-				<col width="20%"/>
-				<col width="20%"/>
-				<col width="20%"/>
+				<col width="10%" />
+				<col width="10%" />
+				<col width="20%" />
+				<col width="20%" />
+				<col width="20%" />
+				<col width="20%" />
 			</colgroup>
-			<thead>
+			<thead align="center" >
 				<tr>
 					<th scope="col">아이디</th>
 					<th scope="col">패스워드</th>
@@ -27,11 +35,20 @@
 					<th scope="col">가입일</th>
 				</tr>
 			</thead>
+		</table>
+		<table class="table table-hover">
+			<colgroup>
+				<col width="10%" />
+				<col width="10%" />
+				<col width="20%" />
+				<col width="20%" />
+				<col width="20%" />
+				<col width="20%" />
+			</colgroup>
 			<tbody>
 				<tr th:if="${#lists.size(list)} > 0" th:each="vo : ${list}">
-					<td>
-						<a href="/user/userDetail/" th:attrappend="href=${vo.id}" th:text="${vo.id}"></a>
-					</td>
+					<td><a href="/user/userDetail/" th:attrappend="href=${vo.id}"
+						th:text="${vo.id}"></a></td>
 					<td th:text='${vo.pw}' align="center"></td>
 					<td th:text='${vo.name}' align="center"></td>
 					<td th:text='${vo.email}' align="center"></td>
@@ -43,7 +60,25 @@
 				</tr>
 			</tbody>
 		</table>
-		<a href="/user/userInsert" class="btn">사용자 추가</a>
+		<button type="button" class="btn btn-light">
+			<a href="/user/userInsert">사용자 추가</a>
+		</button>
 	</div>
-</body>
+
+</div>
 </html>
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>게시판 리스트</title>
+
+</head>
+<body>
+	
+</body>
+</html> -->

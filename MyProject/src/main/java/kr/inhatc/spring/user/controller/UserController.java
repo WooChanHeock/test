@@ -23,10 +23,7 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping("/")
-	public String hello() {
-		return "redirect:/user/userList";
-	}
+	
 	
 // GET(read), POST(create), PUT(update), DELETE(delete)
 	

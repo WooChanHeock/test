@@ -33,9 +33,14 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 	
-	@RequestMapping("/")
-	public String hello() {
-		return "index";
+//	@RequestMapping("/")
+//	public String hello() {
+//		return "index";
+//	}
+	
+	@RequestMapping("/test/testPage")
+	public String testPage() {
+		return "/test/testPage";
 	}
 	
 	@RequestMapping("/board/boardList")

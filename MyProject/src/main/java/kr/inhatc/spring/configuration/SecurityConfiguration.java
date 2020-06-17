@@ -1,8 +1,11 @@
 package kr.inhatc.spring.configuration;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -32,5 +35,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		security.logout().logoutUrl("/login/logout").invalidateHttpSession(true).logoutSuccessUrl("/");
 	}
 
+	/**
+	 * 
+	 * 1. 개요 : 패스워드에 암호화 처리
+	 * 2. 처리내용 : 암호화 처리
+	 * @Method Name : passwordEncoder
+	 * @return
+	 */
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+	}
 	
 }

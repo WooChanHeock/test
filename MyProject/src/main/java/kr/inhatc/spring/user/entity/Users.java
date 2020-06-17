@@ -24,6 +24,7 @@ public class Users {
 	private String pw;
 	private String name;
 	private String email;
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(insertable = false, columnDefinition = "date default sysdate")
 	private Date joinDate;

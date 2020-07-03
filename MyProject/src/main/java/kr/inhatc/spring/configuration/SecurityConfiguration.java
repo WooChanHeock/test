@@ -17,7 +17,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		security.authorizeRequests().antMatchers("/").permitAll();
 		
 		// MEMBER 권한이 있는 사용자 접근 경로
-		security.authorizeRequests().antMatchers("/user/**").hasAnyRole("MEMBER", "ADMIN");
+		security.authorizeRequests().antMatchers("/user/userList").hasAnyRole("MEMBER", "ADMIN");
 		
 		// ADMIN 권한이 있는 사용자 접근 경로
 		security.authorizeRequests().antMatchers("/board/**").hasRole("ADMIN");
@@ -46,5 +46,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	public PasswordEncoder passwordEncoder() {
 		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
 	}
+	
 	
 }

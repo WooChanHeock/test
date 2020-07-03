@@ -1,27 +1,29 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  xmlns:sec="http:www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      layout:decorator="layout/default">
 
 
 
 <header th:fragment="headerFragment">
 
-	<div class="jumbotron text-center mb-0" style=" background: url('img/jbbg.jpg');">
+	<div class="jumbotron text-center mb-0" style=" background-color: black;">
 		<h1>IMAGINE DRAGONS Homepage</h1>
 		<p>! 이매진 드래곤스!</p>
 	</div>
 
-	<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+	<nav class="navbar navbar-expand-md navbar-dark bg-dark" id="sectionsNav">
 		<div
 			class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item active"><a class="nav-link" href="/">Home
 						<span class="sr-only">(current)</span>
 				</a></li>
-				<li class="nav-item"><a class="nav-link" href="/board/boardList">게시판</a></li>
-				<li class="nav-item"><a class="nav-link" href="/user/userList">사용자</a></li>
-				<li class="nav-item"><a class="nav-link"
-					href="/board/boardList">관리자</a></li>
+				<li class="nav-item" sec:authorize="isAuthenticated()"><a class="nav-link" href="/board/boardList">수다방</a></li>
+				<li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')"><a class="nav-link" href="/user/userList">사용자</a></li>
+				<li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')"><a class="nav-link" href="/board/boardList">관리자</a></li>
+				
 			</ul>
 		</div>
 		<div class="mx-auto order-0">
@@ -41,8 +43,9 @@
 						<a th:href="@{/login/login}" class="dropdown-item">로그인</a>
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" th:href="@{/login/logout}">로그아웃</a>
+						<a class="dropdown-item" th:href="@{/user/userInsert}">회원가입</a>
 					</div></li>
-				<li class="nav-item"><a class="nav-link" href="#">Right</a></li>
+				<li class="nav-item">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
 			</ul>
 		</div>
 	</nav>
